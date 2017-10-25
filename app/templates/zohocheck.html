@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<title>zoho信息查询小程序</title>
+<h1>zoho信息查询小程序v1.2</h1>
+<form action="" method="post" name="login">
+    {{form.hidden_tag()}}
+        <p>
+        <input type="radio" name="search_type" value="CLIENT" checked >根据客户名称查询
+        <input type="radio" name="search_type" value="DMD" >根据平台地址查询（平台开头英文字母）
+
+    </p>
+
+    <p>
+    请输入关键字（支持模糊搜索，最少2个字)<input type="text" name="keyword" size="40" required="required" pattern="\S+\S+" title="请输入至少2个字" > <br>
+    password<input type="password" name="password" size="40" required="required">    <br>
+
+
+    </p>
+    <p><input type="submit" value="查询"></p>
+</form>
+
+    <div>
+
+查询结果如下：
+       <dl>
+{% for key, value in result.items() %}
+    <dt>{{ key|e }}</dt>
+    <dd>{{ value|e }}</dd>
+{% endfor %}
+
+</dl>
+
+    </div>
+
+
+{% endblock %}

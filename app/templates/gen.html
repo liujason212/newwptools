@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<title>webpower 域名查询小程序</title>
+<h1>DKIM DMARC生成结果<br>
+
+</h1>
+
+    <div>
+        客户域名 {{ domain_to_check }} <br>
+        客户平台地址  {{ form.license.data }}<br>
+
+    </div>
+    <div>
+    <ul>
+        <li>
+            DKIM域名
+        </li>
+        {{ result1 }} <br>
+        <li> DKIM CNAME
+        </li>
+           {{ result2 }} <br>
+        <li>
+            DMARC域名
+        </li>
+         {{ result3 }} <br>
+        <li>
+            DMARC TXT
+        </li>
+        {{ result4 }}<br>
+
+    </ul>
+
+
+    <a href="dnscheck.html">返回</a>
+
+    </div>
+
+{% endblock %}

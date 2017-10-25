@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<title>配置页面</title>
+<h1>配置页面</h1>
+<div>
+<form action="" method="post" name="Web_config">
+{{form.hidden_tag()}}
+     <p>
+        <input type="radio" name="change_type" value="password" checked >修改password
+        <input type="radio" name="change_type" value="token" >修改token
+    </p>
+
+    <p>
+
+    输入新的值<input type="text" name="change_input" size="30">    <br>
+    超级密码<input type="password" name="super_password" size="30" required="required">    <br>
+
+    </p>
+    <p><input type="submit" value="提交"></p>
+</form>
+</div>
+{% endblock %}

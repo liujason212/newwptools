@@ -1,0 +1,38 @@
+<html>
+  <head>
+  <!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-107859822-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-107859822-1');
+</script>
+
+
+    {% if title %}
+    <title>{{title}}</title>
+    {% else %}
+    <title>wp实用小工具</title>
+    {% endif %}
+有任何问题请联系开发者<a href="mailto:jason.liu@webpowerchina.com">jason liu</a> <br>
+  <a href="index.html">返回首页</a>
+  </head>
+
+
+ <hr>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
+    {% for message in messages %}
+    <p>{{ message }} </p>
+    {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
+
+    {% block content %}{% endblock %}
+  </body>
+</html>

@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <title>webpower 域名查询小程序</title>
+<h1>webpower 域名查询小程序 v1.31</h1>
+<div>
+<form action="" method="post" name="dnscheck" >
+    {{form.hidden_tag()}}
+
+
+
+    <p>
+        <input type="radio" name="check_type" value="dns-cn" checked >国内平台-查询开通所需要的3条记录(A/MX/TXT)
+        <input type="radio" name="check_type" value="dns-eu" >海外平台-查询开通所需要的3条记录(A/MX/TXT)
+    </p>
+
+
+    <p>
+        <input type="radio" name="check_type" value="dkim_dmarc" >查询Dkim和Dmarc
+        <input type="radio" name="check_type" value="gen_dkim_dmarc" >生成Dkim和Dmarc
+    </p>
+
+
+
+
+
+
+    <p>
+        输入客户所提供的域名 <input type="text" name="domain" required="required" size="40" pattern="^[0-9a-zA-Z\-]+[0-9a-zA-Z\.\-]+\.+[0-9a-zA-Z]+$" title="请输入正确的域名 去除http">  <br>
+        输入dmd平台地址的域名，例如:abec.webpower.asia(查询dkim/dmac必须输入） <input type="text" name="license" size="40" pattern="^[0-9a-zA-Z\-]+[0-9a-zA-Z\.\-]+\.+[0-9a-zA-Z]+$" title="请输入正确的平台地址 去除http" > <br>
+        若需要查询域名ICP备案情况,请输入密码<input type="password" name="password" size="20" >
+    </p>
+
+
+   <p><input type="submit" value="查询"></p>
+</form>
+</div>
+
+<div>
+<p>
+查询结果如下：
+{% if result=='网络连接超时' %}
+    网络连接超时,请稍后重试
+{% else %}
+       <dl>
+{% for key, value in result.items() %}
+    <dt>{{ key|e }}</dt>
+        {% for x in value %}
+            <dd>{{ x|e }}</dd>
+            {% endfor %}
+{% endfor %}
+{% endif %}
+
+</dl>
+</p>
+<br>
+<br>
+<p>
+ICP备案情况查询:
+
+{% if '密码错误'in result_icp %}
+    密码错误，请重新输入
+{% else %}
+<dl>
+{% for key, value in result_icp.items() %}
+    <dt>{{ key|e }}</dt>
+    <dd>{{ value|e }}</dd>
+{% endfor %}
+{% endif %}
+    </dl>
+</p>
+    </div>
+
+{% endblock %}
