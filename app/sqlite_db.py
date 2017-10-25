@@ -60,6 +60,8 @@ def get_db_password():
     cursor.execute('SELECT *from web_config where id=?', ('1',))
     values = cursor.fetchall()
     values=values[0][1]
+    cursor.close()
+    conn.close()
     print(values)
     return values
 
@@ -69,6 +71,8 @@ def get_db_token():
     cursor.execute('SELECT *from web_config where id=?', ('1',))
     values = cursor.fetchall()
     values = values[0][2]
+    cursor.close()
+    conn.close()
     print(values)
     return values
 
