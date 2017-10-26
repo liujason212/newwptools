@@ -9,12 +9,12 @@ def zoho_check(keyword,password,type):
 
     # zoho模块名称，这里是查询clients
     module_name = 'Accounts'
-    real_password =sqlite_db.get_db_password()
+    real_password ='wpython'
     print('zhaobug')
     print(real_password)
     print(mypath)
     if password == real_password:
-        authtoken =sqlite_db.get_db_token()
+        authtoken ='128cc932aa8d298ff7576671a5234ee1'
         # 显示哪些列
         selectColumns = 'Account Owner,WP Client Number,Account Name,Client level,dmd平台地址,'
         # 根据选择判断搜索什么
@@ -36,36 +36,37 @@ def zoho_check(keyword,password,type):
         result=r.json()
         #先判断下
         if 'result' not in str(result):
-            final_result = result['response']
+            final_result=result['response']
             del final_result['uri']
             return final_result
             print(final_result)
         else:
-            # 整理json数据
+        #整理json数据
             print('原始查询结果')
             print(result)
             try:
-                result = result['response']['result']['Accounts']['row']['FL']
-                final_result = {}
+                result=result['response']['result']['Accounts']['row']['FL']
+                final_result={}
 
                 for x in result:
                     print(x)
                     print(x['val'])
 
-                    final_result[x['val']] = x['content']
+                    final_result[x['val']]=x['content']
                 print(final_result)
                 del final_result['ACCOUNTID']
                 del final_result['SMOWNERID']
                 return final_result
-            # 当获取到多条记录后，反馈如下信息
+            #当获取到多条记录后，反馈如下信息
             except TypeError:
-                final_result = {'有多条查询结果': '请输入更多关键字进行查询'}
+                final_result={'有多条查询结果':'请输入更多关键字进行查询'}
                 print(final_result)
                 return final_result
+
     else:
         final_result={'密码错误':'请确认后重新输入'}
         return final_result
 
 
 
-
+zoho_check('gg','wpython','CLIENT')
