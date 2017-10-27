@@ -126,6 +126,10 @@ def dnscheck(domain,geo):
         except requests.exceptions.ConnectionError:
             print ('timeout')
             dns_result='网络连接超时'
+        except requests.ReadTimeout:
+            print('read timeout')
+            dns_result = '网络连接超时'
+
 
     print('模块返回')
     print(dns_result)
