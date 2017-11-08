@@ -62,6 +62,11 @@ def zoho_check(keyword,password,type):
                 final_result = {'有多条查询结果': '请输入更多关键字进行查询'}
                 print(final_result)
                 return final_result
+            #访问出错进行提示
+            except requests.RequestException:
+                final_result = {'有错误': '请重试'}
+                print(final_result)
+                return final_result
     else:
         final_result={'密码错误':'请确认后重新输入'}
         return final_result
