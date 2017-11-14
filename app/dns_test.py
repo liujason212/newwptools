@@ -8,6 +8,7 @@ e='newsletter.nike.com.cn'
 f='overseahnair.webpower.eu'
 h='service.toursforfun.com'
 g='edm.liuyun.asia'
+f='newsletter.pisengroup.com'
 cn='CN'
 eu='EU'
-dnscheck_proxy.dnscheck(g,cn)
+dnscheck_proxy.dnscheck(c,cn)

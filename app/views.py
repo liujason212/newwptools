@@ -56,29 +56,3 @@ def dns():
             return render_template('gen.html', form=form, result1=result1, result2=result2, result3=result3,result4=result4,domain_to_check=domain_to_check,license_to_check=license_to_check)
 
     return render_template('dnscheck.html', form=form, result=result,result_icp=result_icp)
-
-        #print (type(result))
-
-'''        if result=='网络连接超时':
-            result1='链接超时 请稍后重试'
-            result2='链接超时 请稍后重试'
-            result3='链接超时 请稍后重试'
-        else:
-            for key,value in result.items():
-                print (key)
-                my_list.append(key)
-                print(type(value))
-                for v in value:
-                    print(v)
-                    my_list.append(v)
-            print (my_list)
-            result1=my_list[0:3]
-            result1=','.join(result1)
-            result2=my_list[3:6]
-            result2 =','.join(result2)
-            result3=my_list[6:9]
-            result3 =','.join(result3)
-
-    return render_template('dnscheck.html', form=form,result1=result1,result2=result2,result3=result3)
-    '''
-

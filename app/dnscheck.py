@@ -67,22 +67,35 @@ def dnscheck(domain,geo):
                 newdata=r['Answer']
                 #将多个答案整合到一起，并做一下数据处理
                 for x in newdata:
+                    print(x)
                     if x['data'].startswith('"') and x['data'].endswith('"'):
                         x['data'] = x['data'][1:-1]
                     elif question == 'MX':
                         x['data'] = x['data'][2:-1].strip()
+                    try:
+                        data = ' '.join(data.split())
+                    except Exception:
+                        pass
                     newdata_list.append(x['data'])
-                    data=newdata_list
+                    print(newdata_list)
+                data=newdata_list
+                print(data)
             #对单个答案进行数据整理
             if type(data)==type('string') and data.startswith('"') and data.endswith('"'):
                 data=data[1:-1]
             if question=='MX'and type(data)==type('string'):
                 data=data[2:-1].strip()
+            # 将2个空格改为1个
+            try:
+                data = ' '.join(data.split())
+            except Exception:
+                pass
             print(data)
             #将结果和问题做成dict
             dns_result[question]=[data]
             #只是为了调用方便
             dns_result_list=dns_result[question]
+            print(dns_result_list)
             #对结果，和国内平台的正确信息进行匹配
             if geo=='CN':
                 # 如果data是列表的话，需要做循环判断
