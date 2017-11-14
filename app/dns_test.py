@@ -11,4 +11,4 @@ g='edm.liuyun.asia'
 f='newsletter.pisengroup.com'
 cn='CN'
 eu='EU'
-dnscheck_proxy.dnscheck(c,cn)
+dnscheck_proxy.dnscheck(b,eu)

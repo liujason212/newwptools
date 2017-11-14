@@ -62,6 +62,17 @@ def dnscheck(domain,geo):
             #判断得到的查询结果是1个的话运行如下代码
             if len(r['Answer'])==1:
                 data = (r['Answer'][0]['data'])
+                # 对单个答案进行数据整理
+                if type(data) == type('string') and data.startswith('"') and data.endswith('"'):
+                    data = data[1:-1]
+                if question == 'MX' and type(data) == type('string'):
+                    data = data[2:-1].strip()
+                # 将2个空格改为1个
+                try:
+                    data = ' '.join(data.split())
+                except Exception:
+                    pass
+                print(data)
             # 判断得到的查询的结果长度是1个以上的话运行如下代码
             elif len(r['Answer']) >1:
                 newdata=r['Answer']
@@ -80,17 +91,6 @@ def dnscheck(domain,geo):
                     print(newdata_list)
                 data=newdata_list
                 print(data)
-            #对单个答案进行数据整理
-            if type(data)==type('string') and data.startswith('"') and data.endswith('"'):
-                data=data[1:-1]
-            if question=='MX'and type(data)==type('string'):
-                data=data[2:-1].strip()
-            # 将2个空格改为1个
-            try:
-                data = ' '.join(data.split())
-            except Exception:
-                pass
-            print(data)
             #将结果和问题做成dict
             dns_result[question]=[data]
             #只是为了调用方便

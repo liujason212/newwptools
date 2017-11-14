@@ -198,9 +198,6 @@ def new_dkim_dmarc(domain,license):
 
 
 
-
-
-
 def gen_dkim_dmarc(domain, license):
     # 需要根据用户填入的信息生成正确的dkim域名和对应的cname值
     gen_dkim_dmarc_result={}
