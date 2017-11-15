@@ -9,6 +9,8 @@ domain4='starbucks-system.webpower.asia'
 license4='e2.starbucks.com.cn'
 domain5='service.toursforfun.com'
 license5='toursforfun-service.dmdelivery.com'
+domain6='my-edm.toysrus.com.my'
+license6='toysrusmy.webpower.eu'
 
 
 

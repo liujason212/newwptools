@@ -82,13 +82,12 @@ def new_dkim_dmarc(domain,license):
                     if x['data'].startswith('"') and x['data'].endswith('"'):
                         x['data'] = x['data'][1:-1]
                     # 去除查询结果后面的.
-                    if data.endswith('.'):
-                        data = data[:-1]
-                    data = "".join(data.split())
+                    if x['data'].endswith('.'):
+                        x['data'] = x['data'][:-1]
+                        x['data'] = "".join(x['data'].split())
                     newdata_list.append(x['data'])
                 data = newdata_list
             result['dkim'].append(data)
-            print ('jiemao')
             print(data)
             #查询对于的正确dkim txt值
             dnslookup = 'https://dns.google.com/resolve?name=' + dkim_correct_record + '&type=16'
@@ -104,6 +103,9 @@ def new_dkim_dmarc(domain,license):
                 dkim_txt_data = dkim_txt_data[:-1]
             dkim_txt_data = "".join(dkim_txt_data.split())
             dkim_correct_record.append(dkim_txt_data)
+            #加入TXT查询结果的提示，以便跳过后续验证
+            index_result = result['dkim'].index('下方为查询结果')
+            result['dkim'][index_result] = ['没有CNAME查询结果，下方为TXT查询结果，请联系TS进行验证']
         except KeyError:
             print('there is no value of txt')
             result['dkim'].append('没有任何配置信息')
@@ -150,9 +152,9 @@ def new_dkim_dmarc(domain,license):
                 if x['data'].startswith('"') and x['data'].endswith('"'):
                     x['data'] = x['data'][1:-1]
                 # 去除查询结果后面的.
-                if data.endswith('.'):
-                    data = data[:-1]
-                data = "".join(data.split())
+                if x['data'].endswith('.'):
+                    x['data'] = x['data'][:-1]
+                    x['data'] = "".join(x['data'].split())
                 newdata_list.append(x['data'])
             data = newdata_list
         result['dmarc'].append(data)
@@ -164,12 +166,14 @@ def new_dkim_dmarc(domain,license):
         result['dmarc'].append('网络超时')
     print('dkim dmarc 查询结果')
     print(result)
-    print('我看下bug')
     print(result['dkim'])
-    if '网络超时' not in result['dkim'] and '没有任何配置信息' not in result['dkim']:
+    #开始进行结果验证
+    if '网络超时'not in str(result['dkim']) and '没有CNAME查询结果，下方为TXT查询结果，请联系TS进行验证' not in str(result['dkim']) and '没有任何配置信息'not in str(result['dkim']):
         print('dkim正确值')
         print(dkim_correct_record)
         for x in result['dkim'][3:]:
+            print('bug')
+            print(x)
             if x ==dkim_correct_record:
                 result['dkim'].append('配置正确')
             elif x in dkim_correct_record:
@@ -181,9 +185,10 @@ def new_dkim_dmarc(domain,license):
                     result['dkim'].append('配置正确')
                 else:
                     result['dkim'].append('配置错误')
+
     print('dkim验证结果')
     print(result)
-    if '网络超时' not in result['dmarc'] and '没有任何配置信息' not in result['dmarc']:
+    if '网络超时' not in str(result['dmarc']) and '没有任何配置信息' not in str(result['dmarc']) :
         print('dmarc正确值' + dmarc_correct_record)
         for x in result['dmarc'][3:]:
             if x ==dmarc_correct_record:
