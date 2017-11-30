@@ -52,7 +52,7 @@ def dnscheck(domain,geo):
         try:
             r = requests.get(dnslookup,proxies=proxies,timeout=3)
             #r = requests.get(dnslookup,timeout=3)
-            r = r.json()
+            r = r.json(strict=False) #20171130加入strict=False排除符合要求的json字符
             print(r)
             #显示需要查询什么
             question=r['Question'][0]['type']

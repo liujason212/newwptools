@@ -9,6 +9,8 @@ f='overseahnair.webpower.eu'
 h='service.toursforfun.com'
 g='edm.liuyun.asia'
 f='newsletter.pisengroup.com'
+h='email.eightdragonsdigital.com'
 cn='CN'
 eu='EU'
+
 dnscheck_proxy.dnscheck(b,eu)
