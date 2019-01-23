@@ -56,3 +56,4 @@ def dns():
             return render_template('gen.html', form=form, result1=result1, result2=result2, result3=result3,result4=result4,domain_to_check=domain_to_check,license_to_check=license_to_check)
 
     return render_template('dnscheck.html', form=form, result=result,result_icp=result_icp)
+

@@ -18,7 +18,10 @@ def check():
         keyword= form.keyword.data
         password= form.password.data
         type=form.search_type.data
-        result=zohocheck.zoho_check(keyword,password,type)
+        try:
+            result=zohocheck.zoho_check(keyword,password,type)
+        except OSError as E:
+            result={'异常发生':'有错误发生请稍后重试，若多次重试后无效，请联系jason liu'}
     return render_template('zohocheck.html',result=result,form=form)
 
 
